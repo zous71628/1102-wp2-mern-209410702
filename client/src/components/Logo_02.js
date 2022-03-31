@@ -1,9 +1,12 @@
 import React from 'react'
+import logo from '../assets/images/logo.svg'
 
-function Logo_02() {
+const logo_02 = () => {
   return (
-    <img src={Logo_02} alt="jobify" className="logo"></img>
+    <div>
+      <img src={logo} alt="jobify" className="logo" />
+    </div>
   )
 }
 
-export default Logo_02
+export default logo_02
