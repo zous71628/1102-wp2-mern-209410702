@@ -1,0 +1,26 @@
+{
+  "name": "1102-wp2-mern-209410702",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server_02.js",
+    "dev": "nodemon server_02.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zous71628/1102-wp2-mern-209410702.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zous71628/1102-wp2-mern-209410702/issues"
+  },
+  "homepage": "https://github.com/zous71628/1102-wp2-mern-209410702#readme",
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "mongoose": "^6.2.11"
+  }
+}
