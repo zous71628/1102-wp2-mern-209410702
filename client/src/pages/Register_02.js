@@ -9,13 +9,17 @@ const initialState = {
   name: '',
   email: '',
   password: '',
-  isMember: true,
+  isMember: false,
   showAlert: false,
 };
 
 const Register_02 = () => {
   const [values, setValues] = useState(initialState);
   const { showAlert, displayAlert } = useAppContext();
+
+  const toggleMember = () => {
+    setValues({...values, isMember:!values.isMember});
+  };
 
   const handleChange = (e) => {
     console.log('e.target', e.target);
@@ -25,8 +29,8 @@ const Register_02 = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     console.log('e.target', e.target);
-    const {email,password}=values;
-    if (!email||!password){
+    const { email, password } = values;
+    if (!email || !password) {
       displayAlert();
       return;
     }
@@ -34,37 +38,44 @@ const Register_02 = () => {
 
   return (
     <Wrapper>
-      <form className='form' onSubmit={onSubmit}>
+      <form className="form" onSubmit={onSubmit}>
         <Logo_02 />
-        <h3>Register</h3>
+        <h3>{values.isMember ? 'LOGIN' : 'REGISTER'}</h3>
         {showAlert && <Alert_02 />}
         {/*name input*/}
-        <FormRow_02
-          type='text'
-          name='name'
-          value={values.name}
-          handleChange={handleChange}
-          className='form-input'
-        />
+        {!values.isMember && (
+          <FormRow_02
+            type="text"
+            name="name"
+            value={values.name}
+            handleChange={handleChange}
+            className="form-input"
+          />
+        )}
+
         {/* email input */}
         <FormRow_02
-          type='email'
-          name='email'
+          type="email"
+          name="email"
           value={values.email}
           handleChange={handleChange}
-          className='form-input'
+          className="form-input"
         />
         {/* password input */}
         <FormRow_02
-          type='password'
-          name='password'
+          type="password"
+          name="password"
           value={values.password}
           handleChange={handleChange}
-          className='form-input'
+          className="form-input"
         />
 
-        <button className='btn btn-block' type='submit'>
+        <button className="btn btn-block" type="submit">
           Submit
+        </button>
+        <p>{values.isMember ? 'Not a member yet?' : 'Already a member?'}</p>
+        <button type="button" className="member-btn" onClick={toggleMember}>
+          {values.isMember ? 'Register' : 'Login'}
         </button>
       </form>
     </Wrapper>
