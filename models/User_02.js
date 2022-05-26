@@ -26,18 +26,18 @@ const UserSchema_02 = new mongoose.Schema({
     minLength: 6,
     selected: false,
   },
-  lastName: {
-    type: String,
-    maxLength: 30,
-    default: 'lastName',
-    trim: true,
-  },
-  location: {
-    type: String,
-    maxLength: 30,
-    default: 'my city',
-    trim: true,
-  },
+  // lastName: {
+  //   type: String,
+  //   maxLength: 30,
+  //   default: 'lastName',
+  //   trim: true,
+  // },
+  // location: {
+  //   type: String,
+  //   maxLength: 30,
+  //   default: 'my city',
+  //   trim: true,
+  // },
 });
 
 UserSchema_02.pre('save', async function () {
@@ -52,8 +52,8 @@ UserSchema_02.methods.createJWT = function () {
     {
       userId: this._id,
     },
-    'jwtsecret',
-    { expiresIn: "1d" }
+    process.env.JWT_SECRET,
+    { expiresIn: process.env.JWT_LIFETIME }
   );
 };
 export default mongoose.model('User_02', UserSchema_02);

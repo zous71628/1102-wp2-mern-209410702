@@ -1,6 +1,7 @@
 import React, { useReducer, useContext } from 'react';
 import reducer_02 from './reducer_02';
 import { CLEAR_ALERT, DISPLAY_ALERT } from './action_02';
+import axios from 'axios';
 
 const initialState = {
   isLoading: false,
@@ -21,8 +22,15 @@ const AppProvider_02 = ({ children }) => {
       dispatch({ type: CLEAR_ALERT });
     }, 3000);
   };
+  const registerUser = async ({ currentUser, endPoint, alertText }) => {
+    console.log(endPoint);
+    console.log(currentUser);
+    await axios.post(`http://localhost:5000/api/v1/auth_02/register_02`, currentUser);
+  };
   return (
-    <AppContext_02.Provider value={{ ...state, displayAlert, clearAlert }}>
+    <AppContext_02.Provider
+      value={{ ...state, displayAlert, clearAlert, registerUser }}
+    >
       {children}
     </AppContext_02.Provider>
   );
