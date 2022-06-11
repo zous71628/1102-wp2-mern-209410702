@@ -10,8 +10,8 @@ const TesFetchUseCors_02 = async () => {
 
   const currentUser = {
     name: '黃致瑋',
-    email: 'jack71628@gmail.com',
-    password: '1322312',
+    email: '123@gmail.com',
+    password: '132642',
   };
 
   try {

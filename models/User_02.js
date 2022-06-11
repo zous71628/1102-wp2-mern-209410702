@@ -47,7 +47,7 @@ UserSchema_02.pre('save', async function () {
 });
 
 UserSchema_02.methods.createJWT = function () {
-  // console.log('this',this)
+  console.log('this',this)
   return jwt.sign(
     {
       userId: this._id,
@@ -55,5 +55,11 @@ UserSchema_02.methods.createJWT = function () {
     process.env.JWT_SECRET,
     { expiresIn: process.env.JWT_LIFETIME }
   );
+};
+UserSchema_02.methods.comparePassword = async function (password) {
+  console.log("test");
+  const isMatch = await bcrypt.compare(password, this.password);
+
+  return isMatch;
 };
 export default mongoose.model('User_02', UserSchema_02);
