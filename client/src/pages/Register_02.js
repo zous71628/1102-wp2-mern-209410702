@@ -1,23 +1,23 @@
-import React from "react";
-import { useState } from "react";
-import { Logo_02, FormRow_02 as FormRow_02 } from "../components";
-import Wrapper from "../assets/wrappers/Register_02";
-import { useAppContext } from "../context/appContext_02";
-import Alert_02 from "../components/Alert_02";
-import { LOGIN_USER_BEGIN } from "../context/action_02";
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Logo_02, FormRow_02 as FormRow_02 } from '../components';
+import Wrapper from '../assets/wrappers/Register_02';
+import { useAppContext } from '../context/appContext_02';
+import Alert_02 from '../components/Alert_02';
 
 const initialState = {
-  name: "",
-  email: "",
-  password: "",
+  name: '',
+  email: '',
+  password: '',
   isMember: false,
   showAlert: false,
 };
 
 const Register_02 = () => {
   const [values, setValues] = useState(initialState);
-  const { showAlert, displayAlert, registerUser, loginUser } = useAppContext();
-
+  const navigate = useNavigate();
+  const { user, isLoading, showAlert, displayAlert, registerUser, loginUser } =
+    useAppContext();
   const toggleMember = () => {
     setValues({ ...values, isMember: !values.isMember });
   };
@@ -35,27 +35,34 @@ const Register_02 = () => {
     }
 
     const currentUser = { name, email, password };
-    console.log("form", currentUser);
+    console.log('form', currentUser);
     if (!isMember) {
       registerUser({
         currentUser,
-        endPoint: "register_02",
-        alertText: "User created Redirecting ...",
+        endPoint: 'register_02',
+        alertText: 'User created Redirecting ...',
       });
     } else {
       loginUser({
         currentUser,
-        endPoint: "login_02",
-        alertText: "Login Success Redirecting ...",
+        endPoint: 'login_02',
+        alertText: 'Login Success Redirecting ...',
       });
     }
   };
+  useEffect(() => {
+    if (user) {
+      setTimeout(() => {
+        navigate('/');
+      }, 3000);
+    }
+  }, [user, navigate]);
 
   return (
     <Wrapper>
       <form className="form" onSubmit={onSubmit}>
         <Logo_02 />
-        <h3>{values.isMember ? "LOGIN" : "REGISTER"}</h3>
+        <h3>{values.isMember ? 'LOGIN' : 'REGISTER'}</h3>
         {showAlert && <Alert_02 />}
         {/*name input*/}
         {!values.isMember && (
@@ -85,14 +92,14 @@ const Register_02 = () => {
         />
         <button className="btn btn-block" type="submit">
           Submit
-        </button>{" "}
-        <p>{values.isMember ? "Not a member yet?" : "Already a member?"}</p>
+        </button>{' '}
+        <p>{values.isMember ? 'Not a member yet?' : 'Already a member?'}</p>
         <button type="button" className="member-btn" onClick={toggleMember}>
-          {values.isMember ? "Register" : "Login"}
+          {values.isMember ? 'Register' : 'Login'}
         </button>
       </form>
     </Wrapper>
   );
 };
 
-export default Register_02
+export default Register_02;

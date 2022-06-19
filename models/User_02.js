@@ -26,18 +26,18 @@ const UserSchema_02 = new mongoose.Schema({
     minLength: 6,
     selected: false,
   },
-  // lastName: {
-  //   type: String,
-  //   maxLength: 30,
-  //   default: 'lastName',
-  //   trim: true,
-  // },
-  // location: {
-  //   type: String,
-  //   maxLength: 30,
-  //   default: 'my city',
-  //   trim: true,
-  // },
+  lastName: {
+    type: String,
+    maxLength: 30,
+    default: 'lastName',
+    trim: true,
+  },
+  location: {
+    type: String,
+    maxLength: 30,
+    default: 'my city',
+    trim: true,
+  },
 });
 
 UserSchema_02.pre('save', async function () {
